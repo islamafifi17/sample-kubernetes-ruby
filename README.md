@@ -1,5 +1,5 @@
 # sample-kubernetes-ruby
-New app structure using kubernetes:
+**New app structure using kubernetes**:
 ![alt text](https://github.com/islamafifi17/sample-kubernetes-ruby/blob/master/app-new-structure.png?raw=true)
 
 **Changes Made**:
@@ -18,15 +18,15 @@ New app structure using kubernetes:
   
   •	Use readiness probe to not receive traffic before the app-pod Is ready
 
-**High Availability Flavor**
+**High Availability Flavor**:
 
   •	Implement podAntiAffinity section in app deployment to make sure when having more replicas in a real environment each pod will be scheduled on different node
 
-**Scalability Flavor**
+**Scalability Flavor**:
 
   •	Not implemented now but in real env we can some kind of metrics server to enable kubernetes auto scaling depending on some thresholds like cpu,memory
   
-**How To Use**
+**How To Use**?
 
   1.	Make sure to have a minikube cluster up and running on your local machine
   2.	Add to your /etc/hosts file new entry **${your_minikube_cluster_ip} instabug.com**
