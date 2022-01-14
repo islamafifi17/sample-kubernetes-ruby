@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: drkiq
+  name: drkiq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: drkiq
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: drkiq
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - drkiq
+            topologyKey: "kubernetes.io/hostname" 
+      initContainers:
+      - name: wait-for-postgres
+        image: isibrahim/pg_isready
+        command: ["sh","-c","pg_isready -h postgres"]
+      - name: wait-for-redis
+        image: isibrahim/redis-cli
+        command: ["sh","-c","redis-cli -h redis"]
+      containers:
+      - image: isibrahim/dockerizing-ruby-drkiq
+        name: drkiq
+        command: ["sh","-c","rake db:reset;rake db:migrate;bundle exec unicorn -c config/unicorn.rb"]
+        ports:
+        - containerPort: 8010
+        envFrom:
+        - configMapRef:
+            name: drkiq
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8010

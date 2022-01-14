@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: postgres
+  name: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - image: postgres:12.1
+        name: postgres
+        ports:
+        - containerPort: 5432
+        envFrom:
+        - secretRef:
+            name: postgres
+        - configMapRef:
+            name: postgres
+        volumeMounts:
+        - name: drkiq-postgres
+          mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: drkiq-postgres
+          hostPath:
+            path: /var/lib/postgresql/data

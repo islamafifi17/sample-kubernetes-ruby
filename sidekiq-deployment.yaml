@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: sidekiq
+  name: sidekiq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sidekiq
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: sidekiq
+    spec:
+      initContainers:
+      - name: wait-for-postgres
+        image: isibrahim/pg_isready
+        command: ["sh","-c","pg_isready -h postgres"]
+      - name: wait-for-redis
+        image: isibrahim/redis-cli
+        command: ["sh","-c","redis-cli -h redis"]
+      containers:
+      - image: isibrahim/dockerizing-ruby-drkiq:latest
+        name: sidekiq
+        command: ["sh","-c","bundle exec sidekiq"]
+        envFrom:
+        - configMapRef:
+            name: drkiq
+

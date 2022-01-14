@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  creationTimestamp: null
+  name: drkiq
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: instabug.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: drkiq
+            port:
+              number: 8010
+        path: /
+        pathType: Prefix
+status:
+  loadBalancer: {}

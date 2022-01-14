@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: redis
+  name: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: redis
+    spec:
+      containers:
+      - image: redis:5.0.7
+        name: redis
+        ports:
+        - containerPort: 6379
+        volumeMounts:
+        - name: drkiq-redis
+          mountPath: /var/lib/redis/data
+      volumes:
+      - name: drkiq-redis
+        hostPath:
+          path: /var/lib/redis/data
+        
