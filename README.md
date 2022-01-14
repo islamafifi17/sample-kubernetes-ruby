@@ -24,7 +24,7 @@
 
 **Scalability Flavor**:
 
-  •	Not implemented now but in real env we can some kind of metrics server to enable kubernetes auto scaling depending on some thresholds like cpu,memory
+  •	Not implemented now but in real env we have can some kind of metrics server to enable kubernetes auto scaling depending on some thresholds like cpu,memory
   
 **How To Use**?
 
@@ -34,5 +34,4 @@
   4.	Use this command to create kubernetes resources **kubectl create –f ${path_to_resources_directory}**
   5. open **instabug.com** in your browser you should see this
   ![alt text](https://github.com/islamafifi17/sample-kubernetes-ruby/blob/master/drkiq-ouput.png?raw=true)
- 
  
