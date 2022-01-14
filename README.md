@@ -3,6 +3,7 @@ New app structure using kubernetes:
 ![alt text](https://github.com/islamafifi17/sample-kubernetes-ruby/blob/master/app-new-structure.png?raw=true)
 
 **Changes Made**:
+
   •	Add nginx ingress controller to act as our reverse proxy
   
   •	Create new deployment for each component
@@ -10,6 +11,7 @@ New app structure using kubernetes:
   •	Depend on svc cluster-ip type for communication between pods
 
 **Pods Synchroniztion**:
+
   •	Default behavior for docker-compose is to bring up the dependencies (defined in links section) first
   
   •	Simulating the same behavior by kubernetes using initContainers.. Not to add the postgres or redis in the same deployment as a an initContainer because this will cause       some troubles regarding scaling up and down situations but to implement a health check mechanism in the drkiq-app initcontainers section to make sure the postgres and         redis are up and running
@@ -25,6 +27,7 @@ New app structure using kubernetes:
   •	Not implemented now but in real env we can some kind of metrics server to enable kubernetes auto scaling depending on some thresholds like cpu,memory
   
 **How To Use**
+
   1.	Make sure to have a minikube cluster up and running on your local machine
   2.	Add to your /etc/hosts file new entry **${your_minikube_cluster_ip} instabug.com**
   3.	Enable ingress on your cluster using command **minikube addons enable ingress**
