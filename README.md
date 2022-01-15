@@ -24,7 +24,7 @@
 
 **Scalability Flavor**:
 
-  •	implemented horizontal pod autoscaling for drkiq deployment depending on cpu utilization with a threshold 80% and max number of pods is 5
+  •	implemented horizontal pod autoscaling for drkiq deployment depending on cpu utilization with a threshold 80% and max number of pods is 5 (need to implement a metrics server first for this to work)
   
 **How To Use**?
 
