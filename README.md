@@ -24,7 +24,7 @@
 
 **Scalability Flavor**:
 
-  •	Not implemented now but in real env we have can some kind of metrics server to enable kubernetes auto scaling depending on some thresholds like cpu,memory
+  •	implemented horizontal pod autoscaling for drkiq deployment depending on cpu utilization with a threshold 80% and max number of pods is 5
   
 **How To Use**?
 
